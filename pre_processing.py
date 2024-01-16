@@ -108,19 +108,7 @@ abbreviation_mapping = {
     "WIP" : "Work In Progress",
 }
 
-input = "I ate 12 apples, 3 peaches and 14 cherries!"
 
-# Create an instance of the Pre_Processing class
-preprocessor = Pre_Processing(input)
-
-# Access the processed text
-processed_text = preprocessor.output_text
-
-# Print the processed text
-print("Original Text:")
-print(input)
-print("\nProcessed Text:")
-print(processed_text)
 
         
 

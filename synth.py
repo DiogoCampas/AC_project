@@ -44,7 +44,7 @@ class Utterance:
         words = utterance.split()
 
         for i, word in enumerate(words):
-            print(word)
+            #print(word)
             if word.isdigit():
                 # Convert numerical numbers to text
                 words[i] = p.number_to_words(word)
