@@ -42,6 +42,7 @@ class Utterance:
         """
         p = inflect.engine()
         words = utterance.split()
+        print(words)
 
         for i, word in enumerate(words):
             if word.isdigit():
@@ -65,6 +66,7 @@ class Utterance:
             
             if word.isdigit():
                 words.append(self.convert_numbers_to_text(word.lower()))
+
             else:
                 words.append(word.lower())
 
@@ -78,7 +80,9 @@ class Utterance:
         """
         if word not in self.lexicon:
             sys.exit(f"Couldn't transcribe '{word}'")
-
+            
+        
+        
         # Select variant pronunciation if it exists
         lex_entry = self.lexicon[word] #list of possible pronounciations
         print(lex_entry)
@@ -152,6 +156,7 @@ class Synth:
         # Create audio sequence from diphones
         output_audio = []
         for diphone in self.diphones:
+            #print(diphone)
             filename = self.get_filename(diphone)
             audio = self.audio[filename]
             output_audio.append(audio.data)
