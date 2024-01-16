@@ -42,15 +42,17 @@ class Utterance:
         """
         p = inflect.engine()
         words = utterance.split()
-        print(words)
 
         for i, word in enumerate(words):
+            print(word)
             if word.isdigit():
                 # Convert numerical numbers to text
                 words[i] = p.number_to_words(word)
 
             # Join the words back into a sentence
             return ' '.join(words)
+
+        
 
     def get_words(self, utterance):
         """
