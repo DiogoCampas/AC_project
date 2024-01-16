@@ -52,7 +52,6 @@ class Linguistic_Analysis:
 
     
 
-
 # Example usage:
 word_list = ["the", "baby", "drinks", "water", "and", "the" , "squirrels", "read", "the", "table"]
 
@@ -61,13 +60,5 @@ pos_tags = linguistic_analysis_instance.disambiguate_pos(word_list)
 
 print(pos_tags)
 
-word = "read"
-pos = "VBP"  # Part-of-Speech for "lead" as a verb
 
-best_pronunciation = linguistic_analysis_instance.choose_best_pronunciation(word, pos)
-
-if best_pronunciation:
-    print(f"The best pronunciation of '{word}' as a {pos} is: {best_pronunciation}")
-else:
-    print(f"No suitable pronunciation found for '{word}' as a {pos}.")
 
