@@ -5,7 +5,7 @@ from linguistic_analysis import Linguistic_Analysis
 from pre_processing import Pre_Processing
 
 # Test input
-input_text = "Man, I did everything possible to get 20!"
+input_text = "What you did was excellent!"
 
 # Test Pre-Processing
 pre_processing_instance = Pre_Processing(input_text)
