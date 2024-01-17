@@ -39,7 +39,7 @@ class Linguistic_Analysis:
                     P: {<IN>}
                     V: {<V.*>}
                      PP: {<p> <NP>}
-                    VP: {<PRP>?<TO>?<V> <NP|PP|JJ>*}"""
+                    VP: {<TO>?<V> <NP|PP>*}"""
         parser = RegexpParser(grammar)
         phrases = parser.parse(pos_tags)
         return phrases
