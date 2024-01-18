@@ -15,7 +15,7 @@ nltk.download('omw-1.4')
 from nltk import RegexpParser
 
 # Sample rate constant
-RATE = 16000
+RATE = 8000
 
 class Linguistic_Analysis:
     

@@ -25,4 +25,5 @@ print("Input Text:", input_text)
 print("POS Tags:", pos_tags)
 print("Phrases:", phrases)
 
-#phonetic_transcription_instance = Phonetic_Transcription(pre_processing_instance.output_text, Phonetic_Transcription.diphones, Phonetic_Transcription., phrases)
+phonetic_transcription_instance = Phonetic_Transcription("./diphones", phrases)
+phonetic_transcription_instance.play()
