@@ -21,8 +21,8 @@ class Linguistic_Analysis:
     
     def __init__(self, input_text):
         self.input_text = input_text
-        self.filter = set(string.punctuation)
-        self.lexicon = nltk.corpus.cmudict.dict()
+        #self.filter = set(string.punctuation)
+        #self.lexicon = nltk.corpus.cmudict.dict()
         self.output_text = []
 
     def disambiguate_pos(self, words):
