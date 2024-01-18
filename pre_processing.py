@@ -11,7 +11,7 @@ nltk.download('cmudict')
 nltk.download('punkt')
 
 # Sample rate constant
-RATE = 16000
+RATE = 8000
 
 class Pre_Processing:
     

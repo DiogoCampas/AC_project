@@ -39,6 +39,7 @@ import matplotlib.pyplot as plt
 import librosa
 import soundfile as sf
 
+fs = 8000
 
 def shift_pitch(signal, fs, f_ratio):
     """
@@ -52,13 +53,37 @@ def shift_pitch(signal, fs, f_ratio):
     new_signal = psola(signal, peaks, f_ratio)
     return new_signal
 
+def shift_pitch_phrases(phrases, fs, f_ratio):
+    """
+    Calls psola pitch shifting algorithm
+    :param signal: original signal in the time-domain
+    :param fs: sample rate
+    :param f_ratio: ratio by which the frequency will be shifted
+    :return: pitch-shifted signal
+    """
+    peaks = find_peaks(phrases, fs)
+    new_signal_phrases = psola(phrases, peaks, f_ratio)
+    return new_signal_phrases
 
-def find_peaks(signal, fs, max_hz=950, min_hz=75, analysis_win_ms=40, max_change=1.005, min_change=0.995):
+def shift_pitch_words(words, fs, f_ratio):
+    """
+    Calls psola pitch shifting algorithm
+    :param signal: original signal in the time-domain
+    :param fs: sample rate
+    :param f_ratio: ratio by which the frequency will be shifted
+    :return: pitch-shifted signal
+    """
+    peaks = find_peaks(words, fs)
+    new_signal_words = psola(words, peaks, f_ratio)
+    return new_signal_words
+
+
+def find_peaks(signal, fs, max_hz=117, min_hz=78, analysis_win_ms=10, max_change=1.005, min_change=0.995):
     """
     Find sample indices of peaks in time-domain signal
     :param max_hz: maximum measured fundamental frequency
     :param min_hz: minimum measured fundamental frequency
-    :param analysis_win_ms: window size used for autocorrelation analysis
+    :param analysis_win_ms: window size used for autocorrelation analysis  !!!!!!****** SHOULD THIS BE THE LENGTH OF A DIPHONE? ******!!!!!!!
     :param max_change: restrict periodicity to not increase by more than this ratio from the mean
     :param min_change: restrict periodicity to not decrease by more than this ratio from the mean
     :return: peak indices
@@ -150,7 +175,7 @@ def psola(signal, peaks, f_ratio):
     return new_signal
 
 
-if _name=="main_":
+if __name__=="__main__":
     # Load audio
     orig_signal, fs = librosa.load("robot.wav", sr=44100)
     N = len(orig_signal)

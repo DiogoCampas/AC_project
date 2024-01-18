@@ -7,9 +7,10 @@ import string
 import numpy
 import nltk
 import inflect
+import td_psola 
 
 # Sample rate constant
-RATE = 16000
+RATE = 8000
 
 class Phonetic_Transcription:
 
@@ -58,7 +59,7 @@ class Phonetic_Transcription:
                         segment_ends = [int(N/3), int(2*N/3), N]
                          # Define pitch shift ratios for each segment
                         f_ratio_values = [1.0, 0.7, 0.3]  # Adjust as needed
-                         for i, (start, end) in enumerate(zip(segment_starts, segment_ends)):
+                        for i, (start, end) in enumerate(zip(segment_starts, segment_ends)):
                              
                             # Extract segment
                             segment = output[start:end]
@@ -67,17 +68,56 @@ class Phonetic_Transcription:
                             f_ratio = f_ratio_values[i]
 
                             # Shift pitch for the segment
-                            new_segment = shift_pitch(segment, RATE, f_ratio)
+                            new_segment = td_psola.shift_pitch(segment, RATE, f_ratio)
 
                             # Replace the original segment with the pitch-shifted segment
                             output[start:end] = new_segment
                         
                         
-                    
-                
-                
+                       
             else:
+               # Tokenize and extract phones from input utterance
+                phones = []
+                for leaf in subtree.leaves(): 
+                    for phone in self.get_phones(leaf):
+                            phones.append(phone) #creates a list of phones from the words tokenized
+                    
+                self.diphones = self.get_diphones(phones)
+                
+                # Create mapping from diphone filenames to audio
+                audio = {}
+                for diphone in self.diphones:
+                    filename = self.get_filename(diphone)
+                    if filename not in self.audio:
 
+                        # Ensure that file exists
+                        path = os.path.join(directory, filename)
+                        if not os.path.isfile(path):
+                            sys.exit(f"Couldn't locate '{filename}'")
+
+                        # Load its contents and add to dictionary
+                        audio = simpleaudio.Audio()
+                        audio.load(path)
+                        output = self.get_audio(audio)
+                        # Define segment start and end indices (adjust as needed)
+                        N=len(output)
+                        segment_starts = [0, int(N/3), int(2*N/3)]  # Example: Divide into three equal parts
+                        segment_ends = [int(N/3), int(2*N/3), N]
+                         # Define pitch shift ratios for each segment
+                        f_ratio_values = [1.0, 0.7, 0.3]  # Adjust as needed
+                        for i, (start, end) in enumerate(zip(segment_starts, segment_ends)):
+                             
+                            # Extract segment
+                            segment = output[start:end]
+
+                            # Choose the corresponding pitch shift ratio for the segment
+                            f_ratio = f_ratio_values[i]
+
+                            # Shift pitch for the segment
+                            new_segment = td_psola.shift_pitch(segment, RATE, f_ratio)
+
+                            # Replace the original segment with the pitch-shifted segment
+                            output[start:end] = new_segment
     
     
     
