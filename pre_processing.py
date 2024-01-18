@@ -38,6 +38,8 @@ class Pre_Processing:
                 "WIP" : "Work In Progress",
             }
         
+        #self.exception = {"I"}
+
         self.output_text = []
         
         self.output_text = self.get_words(input_text)
@@ -50,6 +52,7 @@ class Pre_Processing:
         """
         words = []
         abbr = {}
+        #exception = {}
         for word in nltk.word_tokenize(utterance):
 
             # Exclude words in filter
@@ -63,8 +66,10 @@ class Pre_Processing:
                 abbr = self.convert_abbr_to_text(word)
                 words.append(self.convert_abbr_to_text(word.lower()))
                 
+            #elif word.upper() in self.exception:
+            #     word.append(self.exception(word.upper()))
             else:
-                words.append(word.lower())
+                 words.append(word.lower())
 
         return words
 
@@ -108,7 +113,7 @@ abbreviation_mapping = {
     "WIP" : "Work In Progress",
 }
 
-
+#exception = {"I"}
 
         
 
