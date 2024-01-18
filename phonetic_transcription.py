@@ -4,7 +4,7 @@ import argparse
 import simpleaudio
 import nltk
 import string
-import numpy
+import numpy as np
 import nltk
 import inflect
 import td_psola 
@@ -29,6 +29,7 @@ class Phonetic_Transcription:
         # Accessing the phrases
         for subtree in phrases.subtrees():
             f_0 = 0.8
+            output_final = np.zeros(N)
             if subtree.label() is not None and subtree.label() != 'S':  # Ignore the main sentence structure
                 # Tokenize and extract phones from input utterance
                 phones = []
@@ -55,12 +56,13 @@ class Phonetic_Transcription:
                         output = self.get_audio(audio)
                         # Define segment start and end indices (adjust as needed)
                         N=len(output)
+                        output_final = np.zeros(N)
                         segment_starts = [0, int(N/3), int(2*N/3)]  # Example: Divide into three equal parts
                         segment_ends = [int(N/3), int(2*N/3), N]
                          # Define pitch shift ratios for each segment
                         f_ratio_values = [1.0, 0.7, 0.3]  # Adjust as needed
                         for i, (start, end) in enumerate(zip(segment_starts, segment_ends)):
-                             
+                            
                             # Extract segment
                             segment = output[start:end]
 
@@ -72,9 +74,10 @@ class Phonetic_Transcription:
 
                             # Replace the original segment with the pitch-shifted segment
                             output[start:end] = new_segment
+                            output_final = output_final + output
+                            output.save(output_final)
                         
-                        
-                       
+                                  
             else:
                # Tokenize and extract phones from input utterance
                 phones = []
@@ -101,6 +104,7 @@ class Phonetic_Transcription:
                         output = self.get_audio(audio)
                         # Define segment start and end indices (adjust as needed)
                         N=len(output)
+                        output_final = np.zeros(N)
                         segment_starts = [0, int(N/3), int(2*N/3)]  # Example: Divide into three equal parts
                         segment_ends = [int(N/3), int(2*N/3), N]
                          # Define pitch shift ratios for each segment
@@ -118,7 +122,10 @@ class Phonetic_Transcription:
 
                             # Replace the original segment with the pitch-shifted segment
                             output[start:end] = new_segment
+                            output_final = output_final + output
+                            output.save(output_final)
     
+            output.save(output_final)
     
     
     def get_phones(self, word, variant=0):
@@ -183,6 +190,6 @@ class Phonetic_Transcription:
         output = simpleaudio.Audio(rate=rate)
 
         # Concatenate audio and rescale
-        output.data = numpy.concatenate(output_audio)
+        output.data = np.concatenate(output_audio)
         output.rescale(1.0)
         return output
