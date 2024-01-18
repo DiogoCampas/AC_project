@@ -38,6 +38,7 @@ class Pre_Processing:
                 "WIP" : "Work In Progress",
             }
         
+        self.valid_symbol_set = {' !,.? ' }
         #self.exception = {"I"}
 
         self.output_text = []
@@ -65,7 +66,10 @@ class Pre_Processing:
             elif word.upper() in self.abbreviation_mapping:
                 abbr = self.convert_abbr_to_text(word)
                 words.append(self.convert_abbr_to_text(word.lower()))
-                
+
+            elif word in self.valid_symbol_set:
+                words.append(self.get_pronunciation(word))
+
             #elif word.upper() in self.exception:
             #     word.append(self.exception(word.upper()))
             else:
@@ -99,6 +103,12 @@ class Pre_Processing:
         expanded_text = ' '.join(words)
         return expanded_text
 
+    def get_pronunciation(s):
+        parts = s.strip().split(' ')
+        for part in parts:
+            if part not in valid_symbol_set:
+                return None
+        return ' '.join(parts)
 
 abbreviation_mapping = {
     "AFAIK" : "As Far As I Know",
@@ -115,7 +125,7 @@ abbreviation_mapping = {
 
 #exception = {"I"}
 
-        
+valid_symbol_set = {'! , . ? ' }      
 
         
         

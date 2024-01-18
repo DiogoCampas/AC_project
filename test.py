@@ -6,7 +6,7 @@ from pre_processing import Pre_Processing
 from phonetic_transcription import Phonetic_Transcription
 
 # Test input
-input_text = "You ate 5 cookies!"
+input_text = "This tree is very beautiful!"
 
 # Test Pre-Processing
 pre_processing_instance = Pre_Processing(input_text)
@@ -24,5 +24,3 @@ print("\nLinguistic Analysis Output:")
 print("Input Text:", input_text)
 print("POS Tags:", pos_tags)
 print("Phrases:", phrases)
-
-

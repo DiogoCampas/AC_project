@@ -44,11 +44,3 @@ class Linguistic_Analysis:
         phrases = parser.parse(pos_tags)
         return phrases
     
-
-    
-  
-
-
-
-
-
