@@ -37,10 +37,13 @@ class Linguistic_Analysis:
     def syntatic_analysis(self, pos_tags, input_text):
         grammar = """ NP: {<DT>?<JJ>*<NN>}
                     P: {<IN>}
-                    V: {<V.*>}
-                     PP: {<p> <NP>}
-                    VP: {<TO>?<V> <NP|PP>*}"""
+                    
+                    PP: {<p> <NP>}
+                    VP: {<V.*> <NP|PP>*}"""
         parser = RegexpParser(grammar)
+        
+        
         phrases = parser.parse(pos_tags)
+        
         return phrases
     

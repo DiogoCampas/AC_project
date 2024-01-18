@@ -6,7 +6,7 @@ from pre_processing import Pre_Processing
 from phonetic_transcription import Phonetic_Transcription
 
 # Test input
-input_text = "This tree is very beautiful!"
+input_text = "This unit became my favourite in the semester!"
 
 # Test Pre-Processing
 pre_processing_instance = Pre_Processing(input_text)
