@@ -6,7 +6,7 @@ from pre_processing import Pre_Processing
 from phonetic_transcription import Phonetic_Transcription
 
 # Test input
-input_text = "This unit became my favourite in the semester!"
+input_text = "This unit became my best in the semester!"
 
 # Test Pre-Processing
 pre_processing_instance = Pre_Processing(input_text)
@@ -25,5 +25,4 @@ print("Input Text:", input_text)
 print("POS Tags:", pos_tags)
 print("Phrases:", phrases)
 
-phonetic_transcription_instance = Phonetic_Transcription("./diphones", phrases)
-phonetic_transcription_instance.play()
+phonetic_transcription_instance = Phonetic_Transcription("./diphones", pre_processing_instance.output_text)
