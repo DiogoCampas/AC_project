@@ -65,7 +65,9 @@ class Pre_Processing:
 
             elif word.upper() in self.abbreviation_mapping:
                 abbr = self.convert_abbr_to_text(word)
-                words.append(self.convert_abbr_to_text(word.lower()))
+                list = abbr.split()
+                for word in list:
+                    words.append(word.lower())
 
             elif word in self.valid_symbol_set:
                 words.append(self.get_pronunciation(word))
